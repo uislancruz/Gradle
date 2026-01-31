@@ -1,7 +1,6 @@
 package mx.florinda.cardapio;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -32,7 +31,7 @@ public class Database {
 
         var pipocaDoQuico = new ItemCardapio(1L, "Pipoca do quico", """ 
                 Pipoca com muita açucar e caramelo""",
-                PRATOS_PRINCIPAIS, new BigDecimal(2.99), new BigDecimal(3.99));
+                SOBREMESA, new BigDecimal(2.99), new BigDecimal(3.99));
 
         itens.add(pipocaDoQuico);
 

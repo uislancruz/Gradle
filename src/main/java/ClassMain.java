@@ -1,8 +1,9 @@
 import mx.florinda.cardapio.Database;
 import mx.florinda.cardapio.ItemCardapio;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.SQLOutput;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ClassMain {
 
@@ -11,19 +12,23 @@ public class ClassMain {
         Database database = new Database();
         List<ItemCardapio> itens = database.listaItensCardapio();
 
+        //Saber quantos itens de cada cateforia realkmente tem no cardapio
+        //Categoria => Quantidade
+
+        Map<ItemCardapio.CategoriaCardapio, Integer> itensPorCategoria = new HashMap<>();
         for (ItemCardapio item : itens) {
-            System.out.println(item.toString());
+            ItemCardapio.CategoriaCardapio categoria = item.categoria();
+
+            if (!itensPorCategoria.containsKey(categoria)) {
+                itensPorCategoria.put(categoria, 1);
+            }else {
+                Integer quantidadeAnterior = itensPorCategoria.get(categoria);
+                itensPorCategoria.put(categoria, quantidadeAnterior + 1);
+            }
+
         }
+        System.out.println(itensPorCategoria);
 
-        ItemCardapio itemCardapio = itens.get(4);
-
-        System.out.println(itemCardapio.nome());
-
-        System.out.println(itens.size());
-        itens.remove(1);
-        System.out.println(itens.size());
-
-        itens.forEach(System.out::println);
 
     }
 }
