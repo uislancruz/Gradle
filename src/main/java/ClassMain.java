@@ -30,5 +30,11 @@ public class ClassMain {
         System.out.println(itensPorCategoria);
 
 
+        System.out.println("--------De outro jeito--------");
+
+        itens.stream().collect(Collectors.groupingBy(ItemCardapio :: categoria, Collectors.counting()))
+                .forEach((chave,valor) -> System.out.println(chave + "=> " + valor));
+
+
     }
 }
