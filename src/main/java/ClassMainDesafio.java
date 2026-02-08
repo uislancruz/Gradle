@@ -15,13 +15,9 @@ public class ClassMainDesafio {
         System.out.println("-------------------------");
 
 
-        Optional<ItemCardapio> optionalItem = database.itemCardapioPorId(1l);
-        if (optionalItem.isPresent()) {
-            ItemCardapio item = optionalItem.get();
-            System.out.println(item.toString());
-        }else {
-            System.out.println("Nenhum item cardapio encontrado");
-        }
+        Optional<ItemCardapio> optionalItem = database.itemCardapioPorId(61l);
+        String mensagem = optionalItem.map(ItemCardapio::toString).orElse("Não encontrado");
+        System.out.println(mensagem);
 
     }
 }
