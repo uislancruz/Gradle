@@ -25,7 +25,7 @@ public class ClassMainDesafio {
 
         System.out.println("===========================");
 
-        // PRECISA MANTEWR AS CATEFORIAS QUE ESTAO EM PROMOCAO
+        // PRECISA MANTER AS CATEFORIAS QUE ESTAO EM PROMOCAO
 
         Set<ItemCardapio.CategoriaCardapio> categoriaPromocao = new TreeSet<>();
         categoriaPromocao.add(SOBREMESA);
