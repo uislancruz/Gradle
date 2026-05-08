@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
 group = 'mx.florinda'
@@ -18,4 +19,8 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+application {
+    mainClass = 'mx.florinda.cardapio.ServidorItensCardapioComSocket'
 }
