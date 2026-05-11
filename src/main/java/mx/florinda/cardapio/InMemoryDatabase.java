@@ -5,11 +5,12 @@ import java.util.*;
 
 import static mx.florinda.cardapio.ItemCardapio.CategoriaCardapio.*;
 
-public class Database {
+public class InMemoryDatabase {
 
     private final Map<Long, ItemCardapio> itensPorId = new HashMap<>();
+    private final Map<ItemCardapio, BigDecimal> auditoriaPrecos = new HashMap<>();
 
-    public Database() {
+    public InMemoryDatabase() {
         var refrescoDoChaves = new ItemCardapio(1L, "Refresco do Chaves", """ 
                 Suco de limão, que parece tamarindo mas tem gosto de groselha""",
                 BEBIDAS, new BigDecimal(2.99), null);
@@ -76,4 +77,32 @@ public class Database {
         return Optional.ofNullable(itensPorId.get(itemId));
     }
 
-}
+    public boolean removerItemCardapio(Long id){
+        ItemCardapio removido = itensPorId.remove(id);
+        return removido != null;
+    }
+
+    public boolean alterarPrecoItemCardapio(Long id, BigDecimal novoPreco){
+        ItemCardapio item = itensPorId.get(id);
+        if(item == null) return false;
+        ItemCardapio itemPrecoAlterado = item.alteraPreco(novoPreco);
+        itensPorId.put(id, itemPrecoAlterado);
+        auditoriaPrecos.put(item, novoPreco);
+        return true;
+        }
+
+    public void rastroAuditoriaPrecos(){
+        System.out.println("\nAuditoria de preços:");
+        auditoriaPrecos.forEach((item, preco) -> System.out.printf("'%s: %s => %s'\n", item.nome(), item.preco(), preco));
+        System.out.println();
+    }
+
+    public int totalItensCardapio(){
+        return itensPorId.size();
+    }
+
+    public void adicionarItemCardapio(ItemCardapio item){
+        itensPorId.put(item.id(), item);
+    }
+
+    }

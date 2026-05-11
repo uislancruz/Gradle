@@ -1,5 +1,4 @@
-import com.sun.source.doctree.SeeTree;
-import mx.florinda.cardapio.Database;
+import mx.florinda.cardapio.InMemoryDatabase;
 import mx.florinda.cardapio.ItemCardapio;
 
 import java.util.*;
@@ -10,7 +9,7 @@ public class ClassMainDesafio {
 
     static void main(String[] args) {
 
-        Database database = new Database();
+        InMemoryDatabase database = new InMemoryDatabase();
         List<ItemCardapio> itens = database.listaItensCardapio();
         itens.forEach(System.out::println);
 

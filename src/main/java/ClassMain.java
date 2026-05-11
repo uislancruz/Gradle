@@ -1,7 +1,6 @@
-import mx.florinda.cardapio.Database;
+import mx.florinda.cardapio.InMemoryDatabase;
 import mx.florinda.cardapio.ItemCardapio;
 
-import java.sql.SQLOutput;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -9,7 +8,7 @@ public class ClassMain {
 
     static void main(String[] args) {
 
-        Database database = new Database();
+        InMemoryDatabase database = new InMemoryDatabase();
         List<ItemCardapio> itens = database.listaItensCardapio();
 
         //Saber quantos itens de cada cateforia realkmente tem no cardapio
