@@ -10,4 +10,8 @@ public record ItemCardapio(long id, String nome, String descricao, CategoriaCard
         ENTRADAS, PRATOS_PRINCIPAIS, BEBIDAS, SOBREMESA;
     }
 
+    public ItemCardapio alteraPreco(BigDecimal novoPreco){
+        return new ItemCardapio(id, nome, descricao, categoria, novoPreco, precoComDesconto);
+    }
+
 }

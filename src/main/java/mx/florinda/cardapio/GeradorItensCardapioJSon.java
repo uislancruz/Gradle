@@ -9,7 +9,7 @@ import java.util.List;
 
 public class GeradorItensCardapioJSon {
     static void main(String[] args) throws IOException {
-        Database database = new Database();
+        InMemoryDatabase database = new InMemoryDatabase();
         List<ItemCardapio> listaItemCardapio = database.listaItensCardapio();
 
         Gson gson = new Gson();
