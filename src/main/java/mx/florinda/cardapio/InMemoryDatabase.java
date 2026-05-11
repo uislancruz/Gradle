@@ -5,7 +5,7 @@ import java.util.*;
 
 import static mx.florinda.cardapio.ItemCardapio.CategoriaCardapio.*;
 
-public class InMemoryDatabase {
+public class InMemoryDatabase implements Database {
 
     private final Map<Long, ItemCardapio> itensPorId = new HashMap<>();
     private final Map<ItemCardapio, BigDecimal> auditoriaPrecos = new HashMap<>();
@@ -67,21 +67,25 @@ public class InMemoryDatabase {
 
     }
 
+    @Override
     public List<ItemCardapio> listaItensCardapio(){
 
         return new ArrayList<>(itensPorId.values());
     }
 
-    public Optional <ItemCardapio> itemCardapioPorId (Long itemId){
+    @Override
+    public Optional <ItemCardapio> itemCardapioPorId(Long itemId){
         ItemCardapio itemCardapio = itensPorId.get(itemId);
         return Optional.ofNullable(itensPorId.get(itemId));
     }
 
+    @Override
     public boolean removerItemCardapio(Long id){
         ItemCardapio removido = itensPorId.remove(id);
         return removido != null;
     }
 
+    @Override
     public boolean alterarPrecoItemCardapio(Long id, BigDecimal novoPreco){
         ItemCardapio item = itensPorId.get(id);
         if(item == null) return false;
@@ -97,10 +101,12 @@ public class InMemoryDatabase {
         System.out.println();
     }
 
+    @Override
     public int totalItensCardapio(){
         return itensPorId.size();
     }
 
+    @Override
     public void adicionarItemCardapio(ItemCardapio item){
         itensPorId.put(item.id(), item);
     }
