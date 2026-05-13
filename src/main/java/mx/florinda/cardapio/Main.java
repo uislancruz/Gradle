@@ -8,16 +8,32 @@ public class Main {
 
         Database dataBase = new SQLDataBase();
 
+        System.out.println("Itens antes da alteração:");
         List<ItemCardapio> listaItens = dataBase.listaItensCardapio();
         listaItens.forEach(System.out::println);
 
+        System.out.println("--------------------------------");
+
+        Long idParaAlterar = 1L;
+        BigDecimal novoPreco = new BigDecimal("5.90");
+
+        boolean alterou = dataBase.alterarPrecoItemCardapio(idParaAlterar, novoPreco);
+
+        if (alterou) {
+            System.out.println("Preço do item com ID " + idParaAlterar + " alterado com sucesso!");
+        } else {
+            System.out.println("Item com ID " + idParaAlterar + " não encontrado.");
+        }
+
+        System.out.println("--------------------------------");
+
+        System.out.println("Itens depois da alteração:");
+        List<ItemCardapio> listaItensAtualizada = dataBase.listaItensCardapio();
+        listaItensAtualizada.forEach(System.out::println);
+
+        System.out.println("--------------------------------");
+
         int total = dataBase.totalItensCardapio();
         System.out.println("Total de itens no cardapio: " + total);
-
-//        var novoItemCardapio = new ItemCardapio(21, "Tacos de Carnitas", "Tacos recheiados com carnes tenra",
-//                ItemCardapio.CategoriaCardapio.PRATOS_PRINCIPAIS, new BigDecimal(25.9), null);
-//
-//        dataBase.adicionarItemCardapio(novoItemCardapio);
-
     }
 }
