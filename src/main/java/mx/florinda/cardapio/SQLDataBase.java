@@ -4,21 +4,19 @@ import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
-public class SQLDataBase implements Database{
+public class SQLDataBase implements Database {
     @Override
     public List<ItemCardapio> listaItensCardapio() {
         List<ItemCardapio> itens = new ArrayList<>();
 
         String sql = "SELECT id, nome, descricao, categoria, preco, preco_promocional FROM item_cardapio";
 
-        try (Connection connection =
-            DriverManager.getConnection("jdbc:mysql://localhost:3306/cardapio", "root","123");
+        try (Connection connection = ConnectionFactory.getConnection();
 
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery()){
+             PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 long id = rs.getLong("id");
@@ -45,11 +43,10 @@ public class SQLDataBase implements Database{
     @Override
     public int totalItensCardapio() {
         String sql = "SELECT COUNT(*) FROM item_cardapio";
-        try (Connection connection =
-                     DriverManager.getConnection("jdbc:mysql://localhost:3306/cardapio", "root","123");
+        try (Connection connection = ConnectionFactory.getConnection();
 
              PreparedStatement ps = connection.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()){
+             ResultSet rs = ps.executeQuery()) {
 
             int total = 0;
             if (rs.next()) {
@@ -67,9 +64,7 @@ public class SQLDataBase implements Database{
     public void adicionarItemCardapio(ItemCardapio item) {
         String sql = "INSERT INTO item_cardapio (id, nome, descricao, categoria, preco, preco_promocional) VALUES (?,?,?,?,?,?)";
 
-
-        try (Connection connection =
-                     DriverManager.getConnection("jdbc:mysql://localhost:3306/cardapio", "root","123");
+        try (Connection connection = ConnectionFactory.getConnection();
 
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
@@ -92,8 +87,7 @@ public class SQLDataBase implements Database{
     public Optional<ItemCardapio> itemCardapioPorId(Long itemId) {
         String sql = "SELECT id, nome, descricao, categoria, preco, preco_promocional FROM item_cardapio WHERE id = ?";
 
-        try (Connection connection =
-                     DriverManager.getConnection("jdbc:mysql://localhost:3306/cardapio", "root", "123");
+        try (Connection connection = ConnectionFactory.getConnection();
 
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
@@ -129,8 +123,7 @@ public class SQLDataBase implements Database{
     public boolean removerItemCardapio(Long id) {
         String sql = "DELETE FROM item_cardapio WHERE id = ?";
 
-        try (Connection connection =
-                     DriverManager.getConnection("jdbc:mysql://localhost:3306/cardapio", "root", "123");
+        try (Connection connection = ConnectionFactory.getConnection();
 
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
@@ -149,8 +142,7 @@ public class SQLDataBase implements Database{
     public boolean alterarPrecoItemCardapio(Long id, BigDecimal novoPreco) {
         String sql = "UPDATE item_cardapio SET preco = ? WHERE id = ?";
 
-        try (Connection connection =
-                     DriverManager.getConnection("jdbc:mysql://localhost:3306/cardapio", "root", "123");
+        try (Connection connection = ConnectionFactory.getConnection();
 
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
@@ -165,6 +157,4 @@ public class SQLDataBase implements Database{
             throw new RuntimeException(e);
         }
     }
-
-
 }

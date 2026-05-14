@@ -10,7 +10,7 @@ import java.net.InetSocketAddress;
 
 public class ServidorItensCardapio {
     static void main(String[] args) throws IOException {
-        HttpServer httpServer = HttpServer.create(new InetSocketAddress(8080), 0);
+        HttpServer httpServer = HttpServer.create(new InetSocketAddress(8000), 0);
 
         httpServer.createContext("/itensCadapio.json", exchange -> {
             OutputStream responseBody = exchange.getResponseBody();

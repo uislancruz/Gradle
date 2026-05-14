@@ -1,6 +1,6 @@
 package mx.florinda.cardapio;
 
-//import com.google.gson.Gson;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,10 +12,10 @@ public class GeradorItensCardapioJSon {
         InMemoryDatabase database = new InMemoryDatabase();
         List<ItemCardapio> listaItemCardapio = database.listaItensCardapio();
 
-//        //Gson gson = new Gson();
-//        String json = gson.toJson(listaItemCardapio);
-//
-//        Path path = Path.of("itensCardapio.json");
-//        Files.writeString(path, json);
+        Gson gson = new Gson();
+        String json = gson.toJson(listaItemCardapio);
+
+        Path path = Path.of("itensCardapio.json");
+        Files.writeString(path, json);
     }
 }
